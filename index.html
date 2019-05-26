@@ -1,0 +1,149 @@
+<html>
+ <head>
+  <title>CALORIE TRACKER</title>
+ </head>
+ <style>
+ html
+  {
+   background-image: url(black.jpg);
+   background-size:1500px 800px;
+  }
+  body
+  {
+    overflow-y: scroll;
+  }
+ div.input
+ {
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  line-height: 2.0;
+  position: absolute;
+  left:60%;
+ }
+ div.cal
+ {
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  line-height: 2.0;
+  position: absolute;
+  left:30%;
+ }
+ div.head p
+ {
+  text-align: center;
+  color:00ffff;
+  font-family: "Oswald", sans;
+  font-size: 4rem;
+  font-weight: bold;
+  line-height: 3.5rem;
+ }
+ div.det
+ {
+  font-family: 'Open Sans', sans-serif;
+  color: 00ffff;
+  font-size: 30;
+  //line-height: 2.0;
+  position: absolute;
+  top:93%;
+  left:45%;
+ }
+ div.det1
+ {
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  line-height: 2.0;
+  position: absolute;
+  top:97%;
+  left:35%;
+ }
+ #ip
+ {
+  border-radius: 25px;
+  border: 2px solid #609;
+  padding: 20px; 
+  width: 200px;
+  height: 10px;   
+ }
+.button {
+  background-color: ffffff;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 16px;
+}
+ </style>
+ <body>
+  <div class="head">
+    <p>CALORIE TRACKER</p>
+  </div>
+  <div class="cal">
+   weight(Kg)<br>
+   <input type="number" name="wt" id="ip"><br>
+   height(Cm)<br>
+   <input type="number" name="ht" id="ip"><br>
+   age<br>
+   <input type="number" name="age" id="ip"><br><br>
+   <button class="button" onclick="myfn1()">calculate recommended calorie intake</button><br>
+   <p id="calc"></p> 
+   maximum calorie consumption:<br>
+    <input type="number" name="maxcal" id="ip"><br><br>
+    <button class="button" onclick="myfn()">submit</button>
+  </div>
+  <div class="input">
+   food name<br>
+   <input type="text" name="food" id="ip"><br>
+   carbohydrates<br>
+   <input type="number" name="carbs" id="ip"><br>
+   protein<br>
+   <input type="number" name="protein" id="ip"><br>
+   fat<br>
+   <input type="number" name="fat" id="ip"><br>
+   calorie<br>
+   <input type="number" name="cal" id="ip"><br><br>
+   <button class="button" onclick="myfn2()">add food</button>
+   <p id="discal"></p>
+   <button class="button" onclick="reset()">reset</button>
+  </div>
+  <div class="det">
+    foods eaten today:<br>
+  </div>
+  <div class="det1">
+    <p id="fd" style="text-align: left"></p>
+  </div>
+ </body>
+ <script>
+  var maxcal,calcon=0,te="",n,c,p,f,cal;
+  function myfn1()
+  {
+    var w,h,a,c=0,t;
+    w=document.getElementsByName("wt")[0].value;
+    h=document.getElementsByName("ht")[0].value;
+    a=document.getElementsByName("age")[0].value;
+    c=(10*w)+(6.25*h)-(5*a)+5;
+    t="recommended calorie intake:"+c;
+    document.getElementById("calc").innerHTML=t;
+  }
+  function myfn()
+  {
+    maxcal=document.getElementsByName("maxcal")[0].value;
+  }
+  function myfn2()
+  {
+   calcon+=Number(document.getElementsByName("cal")[0].value);
+   document.getElementById("discal").innerHTML="total calories consumed:"+calcon;
+   n=document.getElementsByName("food")[0].value;
+   c=document.getElementsByName("carbs")[0].value;
+   p=document.getElementsByName("protein")[0].value;
+   f=document.getElementsByName("fat")[0].value;
+   cal=document.getElementsByName("cal")[0].value;
+   te+="<br>"+"name:"+n+" "+"carbohydrates:"+c+" "+"protein:"+p+" "+"fat:"+f+" "+"calories:"+cal;
+   document.getElementById("fd").innerHTML=te;
+  }
+  function reset()
+  {
+    document.location.reload();
+  }
+ </script>
+</html>
