@@ -107,6 +107,7 @@
    <button class="button" onclick="reset()">reset</button>
   </div>
   <div class="det">
+    <button class="button" onclick="ret()">retrieve data from local storage</button><br>
     foods eaten today:<br>
   </div>
   <div class="det1">
@@ -114,20 +115,20 @@
   </div>
  </body>
  <script>
-  var maxcal,calcon=0,te="",n,c,p,f,cal;
+  var maxcal,calcon=0,te="",n,c,p,f,cal,rc;
   function myfn1()
   {
-    var w,h,a,c=0,t;
+    var w,h,a,t;
     w=document.getElementsByName("wt")[0].value;
     h=document.getElementsByName("ht")[0].value;
     a=document.getElementsByName("age")[0].value;
-    c=(10*w)+(6.25*h)-(5*a)+5;
-    t="recommended calorie intake:"+c;
+    rc=(10*w)+(6.25*h)-(5*a)+5;
+    t="recommended calorie intake:"+rc;
     document.getElementById("calc").innerHTML=t;
   }
   function myfn()
   {
-    maxcal=document.getElementsByName("maxcal")[0].value;
+    maxcal=Number(document.getElementsByName("maxcal")[0].value);
   }
   function myfn2()
   {
@@ -140,10 +141,28 @@
    cal=document.getElementsByName("cal")[0].value;
    te+="<br>"+"name:"+n+" "+"carbohydrates:"+c+" "+"protein:"+p+" "+"fat:"+f+" "+"calories:"+cal;
    document.getElementById("fd").innerHTML=te;
+   if(calcon>maxcal)
+   {
+    alert("limit exceeded");
+   }
+   localStorage.mc=maxcal;
+   localStorage.cc=calcon;
+   localStorage.fe=te;
+   localStorage.c=rc;
   }
   function reset()
   {
     document.location.reload();
+  }
+  function ret()
+  {
+    maxcal=Number(localStorage.mc);
+    calcon=Number(localStorage.cc);
+    te=localStorage.fe;
+    rc=localStorage.c;
+    document.getElementById("fd").innerHTML=te;
+    document.getElementById("calc").innerHTML="recommended calorie intake"+rc;
+    document.getElementById("discal").innerHTML="total calories consumed:"+calcon;
   }
  </script>
 </html>
